@@ -1,20 +1,14 @@
 // test: console.log('Hello World!');
 
-const getComputerChoice = function () {
+function getComputerChoice() {
   let randomNumber = Math.trunc(Math.random() * 3);
   if (randomNumber === 2) {
-    console.log("rock");
+    return "rock";
   } else if (randomNumber === 1) {
-    console.log("paper");
+    return "paper";
   } else if (randomNumber === 0) {
-    console.log("scissors");
+    return "scissors";
   }
-};
-
-function playRound(playerChoice, computerChoice) {
-  playerChoice = prompt("Choose rock, paper, or scissors");
-  return playerChoice.toLowerCase();
 }
-
-//console.log(getComputerChoice());
-console.log(playRound());
+console.log(getComputerChoice());
+//console.log(playRound(playerSelection, getComputerChoice()));
