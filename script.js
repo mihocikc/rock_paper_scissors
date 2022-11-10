@@ -30,32 +30,51 @@ function validatePlayerChoice(choice) {
   }
 }
 
+//playing one round of RPS
 function playRound() {
+  //calling getPlayerChoice function to get playerThrow
   let playerThrow = getPlayerChoice();
+  //calling getComputerChoice to get computerThrow
   let computerThrow = getComputerChoice();
+  //declaring new functions for repeting win/loss messages
+  let messageLoss = function (playerThrow, computerThrow) {
+    return `You lose, ${computerThrow} beats ${playerThrow}`;
+  };
+  let messageWin = function (playerThrow, computerThrow) {
+    return `You win, ${playerThrow} beats ${computerThrow}`;
+  };
+  //comparing the player throws
   if (playerThrow === computerThrow) {
     return `You threw ${playerThrow} and computer threw ${computerThrow}. It's a tie!`;
   } else if (playerThrow === "rock") {
     if (computerThrow === "paper") {
-      return `You lose, ${computerThrow} beats ${playerThrow}`;
+      return messageLoss(playerThrow, computerThrow);
     } else if (computerThrow === "scissors") {
-      return `You win, ${playerThrow} beats ${computerThrow}`;
+      return messageWin(playerThrow, computerThrow);
     }
   } else if (playerThrow === "paper") {
     if (computerThrow === "scissors") {
-      return `You lose, ${computerThrow} beats ${playerThrow}`;
+      return messageLoss(playerThrow, computerThrow);
     } else if (computerThrow === "rock") {
-      return `You win, ${playerThrow} beats ${computerThrow}`;
+      return messageWin(playerThrow, computerThrow);
     }
   } else if (playerThrow === "scissors") {
     if (computerThrow === "rock") {
-      return `You lose, ${computerThrow} beats ${playerThrow}`;
+      return messageLoss(playerThrow, computerThrow);
     } else if (computerThrow === "paper") {
-      return `You win, ${playerThrow} beats ${computerThrow}`;
+      return messageWin(playerThrow, computerThrow);
     }
+  }
+}
+
+//playing a full 5-round game with scoring
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound());
   }
 }
 
 //console.log(getComputerChoice());
 //console.log(getPlayerChoice());
-console.log(playRound());
+//console.log(playRound());
+console.log(playGame());
