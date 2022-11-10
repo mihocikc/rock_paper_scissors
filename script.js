@@ -95,6 +95,13 @@ function playGame() {
   console.log(
     `Final scores: You - ${playerScore}, Computer - ${computerScore}, Ties - ${tieScore}`
   );
+  if (playerScore > computerScore) {
+    console.log(`Player wins!`);
+  } else if (computerScore > playerScore) {
+    console.log(`Sorry, computer wins!`);
+  } else {
+    console.log(`No one wins`);
+  }
 }
 
 //console.log(getComputerChoice());
