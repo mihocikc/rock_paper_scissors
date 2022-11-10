@@ -7,21 +7,20 @@ function getComputerChoice() {
   } else if (computerChoice === 2) {
     return "scissors";
   }
-  console.log(`Computer threw ${computerChoice}`);
 }
 
 function getPlayerChoice() {
-  let playerChoice = prompt("Choose rock, paper, or scissors").toLowerCase();
-  if (playerChoice === "rock") {
-    return `You threw ${playerChoice}`;
-  } else if (playerChoice === "paper") {
-    return `You threw ${playerChoice}`;
-  } else if (playerChoice === "scissors") {
-    return `You threw ${playerChoice}`;
-  } else {
-    return `Invalid response. Pick rock, paper, or scissors`;
+  let playerChoice = prompt("Choose rock, paper, or scissors");
+  while (playerChoice == null) {
+    playerChoice = prompt("Choose rock, paper, or scissors");
+  }
+  playerChoice = playerChoice.toLowerCase();
+  if (playerChoice !== "rock" || "paper" || "scissors") {
+    return prompt("Invalid response. Choose rock, paper, or scissors");
   }
 }
 
-console.log(getComputerChoice());
+//function playRound
+
+//console.log(getComputerChoice()`);
 console.log(getPlayerChoice());
