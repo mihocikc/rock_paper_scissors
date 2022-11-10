@@ -31,49 +31,73 @@ function validatePlayerChoice(choice) {
 }
 
 //playing one round of RPS
-function playRound(playerThrow, computerThrow) {
+function playRound() {
+  let playerThrow = getPlayerChoice();
+  let computerThrow = getComputerChoice();
   if (playerThrow === computerThrow) {
-    return tie;
+    console.log(
+      `You threw ${playerThrow} and computer threw ${computerThrow}. It's a tie! Try again`
+    );
+    return "none";
   } else if (
     (playerThrow === "rock" && computerThrow === "scissors") ||
     (playerThrow === "paper" && computerThrow === "rock") ||
     (playerThrow === "scissors" && computerThrow === "paper")
   ) {
-    return win;
+    console.log(
+      `You threw ${playerThrow} and computer threw ${computerThrow}. You win!`
+    );
+    return "player";
   } else {
-    return lose;
+    console.log(
+      `You threw ${playerThrow} and computer threw ${computerThrow}. You lose!`
+    );
+    return "computer";
   }
 }
 
-//scoring:
-function gameScore(result) {
-  if (result === win) {
-    playerScore++;
-  } else if (result === lose) {
-    computerScore++;
-  } else if (result === tie) {
-    tieScore++;
-  }
-  console.log(playerScore, computerScore, tieScore);
-}
-
-let playerScore = 0;
-let computerScore = 0;
-let tieScore = 0;
-let playerThrow = getPlayerChoice();
-let computerThrow = getComputerChoice();
-const win = `You threw ${playerThrow} and computer threw ${computerThrow}. You win!`;
-const lose = `You threw ${playerThrow} and computer threw ${computerThrow}. You lose!`;
-const tie = `You threw ${playerThrow} and computer threw ${computerThrow}. It's a tie! Try again`;
+//old:
+// function gameScore(result) {
+//   if (result === win) {
+//     playerScore++;
+//   } else if (result === lose) {
+//     computerScore++;
+//   } else if (result === tie) {
+//     tieScore++;
+//   }
+//   console.log(playerScore, computerScore, tieScore);
+// }
 
 //playing a full 5-round game
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound());
+  // Initialize scores at 0
+  let playerScore = 0;
+  let computerScore = 0;
+  let tieScore = 0;
+
+  // Play games until one player hits 5 points
+  while (playerScore < 5 && computerScore < 5) {
+    // Get result of round
+    let winner = playRound();
+    // If result = player wins, increment playerScore
+    if (winner === "player") {
+      playerScore++;
+    }
+    // If result = computer wins, increment computerScore
+    if (winner === "computer") {
+      computerScore++;
+    }
+    // If result = tie, increment tieScore
+    if (winner === "none") {
+      tieScore++;
+    }
   }
+  console.log(
+    `Final scores: You - ${playerScore}, Computer - ${computerScore}, Ties - ${tieScore}`
+  );
 }
 
 //console.log(getComputerChoice());
 //console.log(getPlayerChoice());
-console.log(playRound(playerThrow, computerThrow));
-//console.log(playGame());
+//console.log(playRound(playerThrow, computerThrow));
+playGame();
