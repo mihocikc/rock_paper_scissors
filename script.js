@@ -1,26 +1,30 @@
+let choices = ["rock", "paper", "scissors"];
+
 function getComputerChoice() {
-  let computerChoice = Math.trunc(Math.random() * 3);
-  if (computerChoice === 0) {
-    return "rock";
-  } else if (computerChoice === 1) {
-    return "paper";
-  } else if (computerChoice === 2) {
-    return "scissors";
-  }
+  return choices[Math.trunc(Math.random() * choices.length)];
 }
 
 function getPlayerChoice() {
   let playerChoice = prompt("Choose rock, paper, or scissors");
-  while (playerChoice == null) {
-    playerChoice = prompt("Choose rock, paper, or scissors");
-  }
   playerChoice = playerChoice.toLowerCase();
-  if (playerChoice !== "rock" || "paper" || "scissors") {
-    return prompt("Invalid response. Choose rock, paper, or scissors");
+  let validation = validatePlayerChoice(playerChoice);
+  if (validation == true) {
+    return playerChoice;
   }
 }
 
-//function playRound
+function validatePlayerChoice(choice) {
+  if (choices.includes(choice)) {
+    return true;
+  }
+}
 
-//console.log(getComputerChoice()`);
+function playRound() {
+  let playerThrow = getPlayerChoice();
+  let computerThrow = getComputerChoice();
+  return `You threw ${playerThrow} and computer threw ${computerThrow}!`;
+}
+
+//console.log(getComputerChoice());
 console.log(getPlayerChoice());
+//console.log(playRound());
