@@ -1,20 +1,6 @@
 // test: console.log('Hello World!');
 
 //GETTING COMPUTER CHOICE
-function getComputerChoice() {
-  let randomNumber = Math.trunc(Math.random() * 3);
-  if (randomNumber === 2) {
-    return "rock";
-  } else if (randomNumber === 1) {
-    return "paper";
-  } else if (randomNumber === 0) {
-    return "scissors";
-  }
-}
-const computerSelection = getComputerChoice();
-//GETTING PLAYER CHOICE
-let playerSelection = prompt("Rock, paper, or scissors?");
-playerSelection = playerSelection.toLowerCase();
 
 //Display message functions to reduce repetition
 function displayMessageWin(player, computer) {
@@ -24,24 +10,47 @@ function displayMessageLoss(player, computer) {
   console.log(`You lose, ${computer} beats ${player}`);
 }
 
+let playerScore = 0;
+let computerScore = 0;
+
+let getComputerChoice = function () {
+  let randomNumber = Math.trunc(Math.random() * 3);
+  if (randomNumber === 2) {
+    return "rock";
+  } else if (randomNumber === 1) {
+    return "paper";
+  } else if (randomNumber === 0) {
+    return "scissors";
+  }
+};
+let computerSelection = getComputerChoice();
+let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
 //PLAYING A ROUND
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection === "paper" && computerSelection === "rock") {
-    return displayMessageWin(playerSelection, computerSelection);
-  } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    return displayMessageLoss(playerSelection, computerSelection);
-  } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    return displayMessageWin(playerSelection, computerSelection);
-  } else if (playerSelection === "rock" && computerSelection === "paper") {
-    return displayMessageLoss(playerSelection, computerSelection);
-  } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    return displayMessageWin(playerSelection, computerSelection);
-  } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    return displayMessageLoss(playerSelection, computerSelection);
-  } else {
-    return `Tie! You both chose ${playerSelection}`;
+  if (playerSelection === computerSelection) {
+    console.log(`It's a tie!`);
+  }
+  if (playerSelection === "paper") {
+    if (computerSelection === "rock") {
+      console.log(displayMessageWin("paper", "rock"));
+    } else if (computerSelection === "scissors") {
+      console.log(displayMessageLoss("paper", "scissors"));
+    }
+  }
+  if (playerSelection === "scissors") {
+    if (computerSelection === "paper") {
+      console.log(displayMessageWin("scissors", "paper"));
+    } else if (computerSelection === "rock") {
+      console.log(displayMessageLoss("scissors", "rock"));
+    }
+  }
+  if (playerSelection === "rock") {
+    if (computerSelection === "scissors") {
+      console.log(displayMessageWin("rock", "scissors"));
+    } else if (computerSelection === "paper") {
+      console.log(displayMessageLoss("rock", "paper"));
+    }
   }
 }
-
-//console.log(playerSelection, computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+console.log(playerSelection, computerSelection);
+console.log(playRound());
