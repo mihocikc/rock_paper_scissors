@@ -1,8 +1,8 @@
-let choices = ["rock", "paper", "scissors"];
+let choices = ["rock", "paper", "scissors"]; //global array to get computer choice and validate user choice
 
 function getComputerChoice() {
   return choices[Math.trunc(Math.random() * choices.length)];
-}
+} //easy enough, this gets the computer choice from the array above
 
 function getPlayerChoice() {
   //get user input and convert to lowercase
@@ -31,43 +31,42 @@ function validatePlayerChoice(choice) {
 }
 
 //playing one round of RPS
-function playRound() {
-  //calling getPlayerChoice function to get playerThrow
-  let playerThrow = getPlayerChoice();
-  //calling getComputerChoice to get computerThrow
-  let computerThrow = getComputerChoice();
-  //declaring new functions for repeting win/loss messages
-  let messageLoss = function (playerThrow, computerThrow) {
-    return `You lose, ${computerThrow} beats ${playerThrow}`;
-  };
-  let messageWin = function (playerThrow, computerThrow) {
-    return `You win, ${playerThrow} beats ${computerThrow}`;
-  };
-  //comparing the player throws
+function playRound(playerThrow, computerThrow) {
   if (playerThrow === computerThrow) {
-    return `You threw ${playerThrow} and computer threw ${computerThrow}. It's a tie!`;
-  } else if (playerThrow === "rock") {
-    if (computerThrow === "paper") {
-      return messageLoss(playerThrow, computerThrow);
-    } else if (computerThrow === "scissors") {
-      return messageWin(playerThrow, computerThrow);
-    }
-  } else if (playerThrow === "paper") {
-    if (computerThrow === "scissors") {
-      return messageLoss(playerThrow, computerThrow);
-    } else if (computerThrow === "rock") {
-      return messageWin(playerThrow, computerThrow);
-    }
-  } else if (playerThrow === "scissors") {
-    if (computerThrow === "rock") {
-      return messageLoss(playerThrow, computerThrow);
-    } else if (computerThrow === "paper") {
-      return messageWin(playerThrow, computerThrow);
-    }
+    return tie;
+  } else if (
+    (playerThrow === "rock" && computerThrow === "scissors") ||
+    (playerThrow === "paper" && computerThrow === "rock") ||
+    (playerThrow === "scissors" && computerThrow === "paper")
+  ) {
+    return win;
+  } else {
+    return lose;
   }
 }
 
-//playing a full 5-round game with scoring
+//scoring:
+function gameScore(result) {
+  if (result === win) {
+    playerScore++;
+  } else if (result === lose) {
+    computerScore++;
+  } else if (result === tie) {
+    tieScore++;
+  }
+  console.log(playerScore, computerScore, tieScore);
+}
+
+let playerScore = 0;
+let computerScore = 0;
+let tieScore = 0;
+let playerThrow = getPlayerChoice();
+let computerThrow = getComputerChoice();
+const win = `You threw ${playerThrow} and computer threw ${computerThrow}. You win!`;
+const lose = `You threw ${playerThrow} and computer threw ${computerThrow}. You lose!`;
+const tie = `You threw ${playerThrow} and computer threw ${computerThrow}. It's a tie! Try again`;
+
+//playing a full 5-round game
 function playGame() {
   for (let i = 0; i < 5; i++) {
     console.log(playRound());
@@ -76,5 +75,5 @@ function playGame() {
 
 //console.log(getComputerChoice());
 //console.log(getPlayerChoice());
-//console.log(playRound());
-console.log(playGame());
+console.log(playRound(playerThrow, computerThrow));
+//console.log(playGame());
